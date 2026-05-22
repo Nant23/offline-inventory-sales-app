@@ -1,7 +1,7 @@
-package com.ananta.pasal.features.dashboard.domain.data.repository
+package com.ananta.pasal.features.dashboard.owner.data.repository
 
-import com.ananta.pasal.features.dashboard.domain.model.DashBoardStats
-import com.ananta.pasal.features.dashboard.domain.repository.OwnerRepository
+import com.ananta.pasal.features.dashboard.owner.domain.model.DashBoardStats
+import com.ananta.pasal.features.dashboard.owner.domain.repository.OwnerRepository
 import com.ananta.pasal.source.local.dao.OrderDao
 import com.ananta.pasal.source.local.dao.ProductDao
 import com.ananta.pasal.source.local.entity.OrderStatus

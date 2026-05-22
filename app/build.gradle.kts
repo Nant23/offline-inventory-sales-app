@@ -65,10 +65,7 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
-    //kapt(libs.room.compiler)
-    //implementation(platform(libs.firebase.bom))
-    //implementation(libs.firebase.auth)
-    // Import the BoM for the Firebase platform
+    implementation(libs.coil.compose)
     implementation(platform("com.google.firebase:firebase-bom:34.13.0"))
 
     // Add the dependency for the Firebase Authentication library

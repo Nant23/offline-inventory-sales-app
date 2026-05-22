@@ -24,10 +24,11 @@ import com.ananta.pasal.utils.components.TText
 
 @Composable
 fun RegisterScreen(
-    viewModel: RegisterViewModel = hiltViewModel(),
+    //viewModel: RegisterViewModel = hiltViewModel(),
     onNavigateToLogin: () -> Unit,
     onRegisterSuccess: (User) -> Unit
 ) {
+    val registerViewModel = androidx.hilt.navigation.compose.hiltViewModel<RegisterViewModel>()
     var fullName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -39,12 +40,12 @@ fun RegisterScreen(
     var shopAddress by remember { mutableStateOf("") }
     var deliveryAddress by remember { mutableStateOf("") }
 
-    val registerState by viewModel.registerState.collectAsState()
+    val registerState by registerViewModel.registerState.collectAsState()
 
     LaunchedEffect(registerState) {
         if (registerState is AuthState.Success) {
             onRegisterSuccess((registerState as AuthState.Success).user)
-            viewModel.resetState()
+            registerViewModel.resetState()
         }
     }
     Column(
@@ -138,7 +139,7 @@ fun RegisterScreen(
 
         Button(
             onClick = {
-                viewModel.register(
+                registerViewModel.register(
                     fullName, email, password, phoneNumber, role,
                     if (role == UserRole.OWNER) shopName else null,
                     if (role == UserRole.OWNER) shopAddress else null,

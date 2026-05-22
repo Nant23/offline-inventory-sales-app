@@ -27,7 +27,7 @@ fun OrderEntity.toDomain(): Order = Order(
 )
 
 // Domain → Entity
-fun Order.toEntity(syncStatus: String = SyncStatus.PENDING): OrderEntity = OrderEntity(
+fun Order.toEntity(syncStatus: SyncStatus = SyncStatus.PENDING): OrderEntity = OrderEntity(
     id = id,
     customerId = customerId,
     customerName = customerName,

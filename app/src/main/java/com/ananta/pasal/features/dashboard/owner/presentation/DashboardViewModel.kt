@@ -4,10 +4,8 @@ package com.ananta.pasal.features.owner.presentation.dashboard
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ananta.pasal.features.authentication.domain.repository.AuthRepository
-import com.ananta.pasal.features.dashboard.domain.model.DashBoardStats
-import com.ananta.pasal.features.dashboard.domain.repository.OwnerRepository
-import com.ananta.pasal.source.local.model.Order
-import com.ananta.pasal.source.local.model.Product
+import com.ananta.pasal.features.dashboard.owner.domain.repository.OwnerRepository
+import com.ananta.pasal.features.dashboard.owner.presentation.DashboardUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -59,15 +57,3 @@ class DashboardViewModel @Inject constructor(
     }
 }
 
-// UI state
-sealed class DashboardUiState {
-    object Loading : DashboardUiState()
-    data class Success(
-        val products: List<Product>,
-        val recentOrders: List<Order>,
-        val stats: DashBoardStats,
-        val ownerName: String,
-        val shopName: String
-    ) : DashboardUiState()
-    data class Error(val message: String) : DashboardUiState()
-}

@@ -1,5 +1,7 @@
 package com.ananta.pasal.source.local.model
 
+import com.ananta.pasal.source.local.entity.SyncStatus
+
 data class Order(
     val id: String,
     val customerId: String,
@@ -11,7 +13,7 @@ data class Order(
     val items: List<OrderItem>,
     val totalPrice: Double,
     val status: String,
-    val syncStatus: String,
+    val syncStatus: SyncStatus,
     val createdAt: Long,
     val updatedAt: Long
 )

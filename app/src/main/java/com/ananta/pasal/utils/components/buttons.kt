@@ -12,8 +12,6 @@ import androidx.compose.ui.unit.dp
 fun TTextButton(
     onClick: () -> Unit,
     text: String,
-
-
 ) {
     TextButton(
         onClick = onClick,

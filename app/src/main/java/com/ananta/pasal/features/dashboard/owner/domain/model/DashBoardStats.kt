@@ -1,4 +1,4 @@
-package com.ananta.pasal.features.dashboard.domain.model
+package com.ananta.pasal.features.dashboard.owner.domain.model
 
 data class DashBoardStats(
     val totalProducts: Int,

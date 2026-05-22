@@ -1,7 +1,6 @@
 // features/owner/presentation/dashboard/DashboardScreen.kt
 package com.ananta.pasal.features.owner.presentation.dashboard
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -12,19 +11,23 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.ananta.pasal.features.dashboard.domain.model.DashBoardStats
+import com.ananta.pasal.features.dashboard.owner.domain.model.DashBoardStats
+import com.ananta.pasal.features.dashboard.owner.presentation.DashboardUiState
 import com.ananta.pasal.source.local.model.Order
 import com.ananta.pasal.source.local.model.Product
+import com.ananta.pasal.utils.components.SSpacer
+import com.ananta.pasal.utils.components.TitleText
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DashboardScreen(
-    onNavigateToInventory: () -> Unit,
-    onNavigateToOrders: () -> Unit,
-    onLogout: () -> Unit,
+fun OwnerDashboardScreen(
+    //onNavigateToOrders: () -> Unit,
+    //onLogout: () -> Unit,
     viewModel: DashboardViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -83,16 +86,12 @@ fun DashboardScreen(
                         .padding(horizontal = 16.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    item { Spacer(modifier = Modifier.height(8.dp)) }
+                    item { SSpacer(8) }
 
                     // stats cards
                     item {
-                        Text(
-                            "Overview",
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.Bold
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
+                        TitleText("Overview")
+                        SSpacer(8)
                         StatsGrid(stats = state.stats)
                     }
 
@@ -108,7 +107,7 @@ fun DashboardScreen(
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold
                             )
-                            TextButton(onClick = onNavigateToOrders) {
+                            TextButton(onClick = { }) {
                                 Text("See all")
                             }
                         }
@@ -144,14 +143,14 @@ fun DashboardScreen(
                         }
                     }
 
-                    item { Spacer(modifier = Modifier.height(8.dp)) }
+                    item { SSpacer(8) }
                 }
             }
         }
     }
 }
 
-// --- Sub-components ---
+// components
 
 @Composable
 fun StatsGrid(stats: DashBoardStats) {
@@ -164,14 +163,14 @@ fun StatsGrid(stats: DashBoardStats) {
             label = "Products",
             value = stats.totalProducts.toString(),
             icon = Icons.Default.Inventory,
-            containerColor = MaterialTheme.colorScheme.primaryContainer
+            //containerColor = MaterialTheme.colorScheme.onPrimary
         )
         StatCard(
             modifier = Modifier.weight(1f),
             label = "Pending Orders",
             value = stats.pendingOrdersCount.toString(),
             icon = Icons.Default.Pending,
-            containerColor = MaterialTheme.colorScheme.secondaryContainer
+            //containerColor = MaterialTheme.colorScheme.onPrimary
         )
     }
     Spacer(modifier = Modifier.height(12.dp))
@@ -184,14 +183,14 @@ fun StatsGrid(stats: DashBoardStats) {
             label = "Out of Stock",
             value = stats.outOfStockCount.toString(),
             icon = Icons.Default.Warning,
-            containerColor = MaterialTheme.colorScheme.errorContainer
+            //containerColor = MaterialTheme.colorScheme.onPrimary
         )
         StatCard(
             modifier = Modifier.weight(1f),
             label = "Revenue",
             value = "NPR ${stats.totalRevenue.toInt()}",
             icon = Icons.Default.AttachMoney,
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer
+            //containerColor = MaterialTheme.colorScheme.onPrimary
         )
     }
 }
@@ -200,20 +199,37 @@ fun StatsGrid(stats: DashBoardStats) {
 fun StatCard(
     label: String,
     value: String,
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
-    containerColor: androidx.compose.ui.graphics.Color,
+    icon: ImageVector,
+    //containerColor: Color,
     modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier,
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = containerColor)
+        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.onPrimary),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 8.dp
+        ),
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Icon(icon, contentDescription = null, modifier = Modifier.size(24.dp))
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(value, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
-            Text(label, style = MaterialTheme.typography.bodySmall)
+            Icon(
+                icon,
+                contentDescription = null,
+                modifier = Modifier.size(24.dp),
+                tint = MaterialTheme.colorScheme.primary
+            )
+            SSpacer(8)
+            Text(
+                value,
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSecondaryContainer
+            )
+            Text(
+                label,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSecondaryContainer
+            )
         }
     }
 }

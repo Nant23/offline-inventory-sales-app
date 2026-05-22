@@ -14,40 +14,62 @@ import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
     primary = PrimaryGreen,
-    onPrimary = White,
+    onPrimary = Color(0xFF1B5E20),
+    primaryContainer = Color(0xFF2E7D32),
+    onPrimaryContainer = Color(0xFFC8E6C9),
 
     secondary = DarkGreen,
-    onSecondary = White,
+    onSecondary = Color(0xFF1B5E20),
+    secondaryContainer = Color(0xFF388E3C),
+    onSecondaryContainer = Color(0xFFC8E6C9),
 
-    background = Background,
-    onBackground = Color.Black,
+    background = Color(0xFF1A1C1A),
+    onBackground = Color(0xFFE2E3DE),
 
-    surface = White,
-    onSurface = Color.Black
+    surface = Color(0xFF252725),
+    onSurface = Color(0xFFE2E3DE),
+    surfaceVariant = Color(0xFF3A3C3A),
+    onSurfaceVariant = Color(0xFFC2C8C2),
+
+    error = Color(0xFFEF9A9A),
+    onError = Color(0xFF7F0000),
+    errorContainer = Color(0xFFB71C1C),
+    onErrorContainer = Color(0xFFFFCDD2),
+
+    tertiary = PrimaryGreen,
+    onTertiary = Color(0xFF1B5E20),
+    tertiaryContainer = Color(0xFF2E7D32),
+    onTertiaryContainer = Color(0xFFC8E6C9)
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = PrimaryGreen,
     onPrimary = White,
+    primaryContainer = Color(0xFFC8E6C9),
+    onPrimaryContainer = Color(0xFF1B5E20),
 
     secondary = DarkGreen,
     onSecondary = White,
+    secondaryContainer = Color(0xFFA5D6A7),
+    onSecondaryContainer = Color(0xFF1B5E20),
 
     background = Background,
     onBackground = Color.Black,
 
     surface = White,
-    onSurface = Color.Black
+    onSurface = Color.Black,
+    surfaceVariant = Color(0xFFEEF2EE),
+    onSurfaceVariant = Color(0xFF444844),
 
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    error = Color(0xFFD32F2F),
+    onError = White,
+    errorContainer = Color(0xFFFFCDD2),
+    onErrorContainer = Color(0xFF7F0000),
+
+    tertiary = DarkGreen,
+    onTertiary = White,
+    tertiaryContainer = Color(0xFFA5D6A7),
+    onTertiaryContainer = Color(0xFF1B5E20)
 )
 
 @Composable

@@ -1,5 +1,7 @@
 package com.ananta.pasal.source.local.model
 
+import com.ananta.pasal.source.local.entity.SyncStatus
+
 data class Product(
     val id: String,
     val ownerId: String,
@@ -11,7 +13,7 @@ data class Product(
     val imageUrl: String?,
     val localImagePath: String?,
     val isDeleted: Boolean,
-    val syncStatus: String,
+    val syncStatus: SyncStatus,
     val createdAt: Long,
     val updatedAt: Long
 )

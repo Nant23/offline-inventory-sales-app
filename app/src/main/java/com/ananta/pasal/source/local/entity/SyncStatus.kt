@@ -1,10 +1,10 @@
 package com.ananta.pasal.source.local.entity
 
-object SyncStatus {
-    const val PENDING = "PENDING"
-    const val SYNCED = "SYNCED"
-    const val DELETED = "DELETED"
+enum class SyncStatus {
+    PENDING,
+    SYNCED,
+    DELETED
 }
-// change to enum
+
 
 

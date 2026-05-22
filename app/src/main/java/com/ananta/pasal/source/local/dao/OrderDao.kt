@@ -19,7 +19,7 @@ interface OrderDao {
     suspend fun getOrderById(id: String): OrderEntity?
 
     @Query("SELECT * FROM orders WHERE syncStatus != :synced")
-    suspend fun getPendingSync(synced: String = SyncStatus.SYNCED): List<OrderEntity>
+    suspend fun getPendingSync(synced: SyncStatus = SyncStatus.SYNCED): List<OrderEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(order: OrderEntity)
@@ -29,11 +29,11 @@ interface OrderDao {
     suspend fun updateStatus(
         id: String,
         status: String,
-        syncStatus: String = SyncStatus.PENDING,
+        syncStatus: SyncStatus = SyncStatus.PENDING,
         now: Long = System.currentTimeMillis()
     )
 
     @Query("UPDATE orders SET syncStatus = :synced WHERE id = :id")
-    suspend fun markSynced(id: String, synced: String = SyncStatus.SYNCED)
+    suspend fun markSynced(id: String, synced: SyncStatus = SyncStatus.SYNCED)
 
 }

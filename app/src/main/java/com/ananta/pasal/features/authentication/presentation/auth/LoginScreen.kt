@@ -5,9 +5,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ananta.pasal.features.authentication.domain.model.User
 import com.ananta.pasal.ui.theme.PasalTheme
@@ -16,21 +18,23 @@ import com.ananta.pasal.utils.components.Logo
 import com.ananta.pasal.utils.components.PasswordTextField
 import com.ananta.pasal.utils.components.SSpacer
 import com.ananta.pasal.utils.components.TTextButton
+import com.ananta.pasal.R
 
 @Composable
 fun LoginScreen(
-    viewModel: LoginViewModel,
+    loginViewModel: LoginViewModel,
     onNavigateToRegister: () -> Unit,
     onLoginSuccess: (User) -> Unit
 ) {
+    //val loginViewModel = hiltViewModel<LoginViewModel>()
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    val loginState by viewModel.loginState.collectAsState()
+    val loginState by loginViewModel.loginState.collectAsState()
 
     LaunchedEffect(loginState) {
         if (loginState is AuthState.Success) {
             onLoginSuccess((loginState as AuthState.Success).user)
-            viewModel.resetState()  // ← clean up after navigation
+            loginViewModel.resetState()  // ← clean up after navigation
         }
     }
 
@@ -69,7 +73,7 @@ fun LoginScreen(
         }
 
         Button(
-            onClick = { viewModel.login(email, password) },
+            onClick = { loginViewModel.login(email, password) },
             modifier = Modifier.fillMaxWidth().height(48.dp),
             enabled = loginState !is AuthState.Loading,
 
@@ -78,7 +82,7 @@ fun LoginScreen(
                 CircularProgressIndicator(modifier = Modifier.size(24.dp), color = MaterialTheme.colorScheme.onPrimary)
             } else {
                 Text(
-                    "Login",
+                    text = stringResource(R.string.login),
                     fontSize = 18.sp
                 )
             }
@@ -89,8 +93,8 @@ fun LoginScreen(
             verticalAlignment = Alignment.CenterVertically,
 
         ) {
-            Text("Don't have an account?")
-            TTextButton(onClick = onNavigateToRegister, text = " Register")
+            Text(stringResource(R.string.no_account))
+            TTextButton(onClick = onNavigateToRegister, stringResource(R.string.register))
         }
     }
 }

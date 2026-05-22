@@ -18,7 +18,7 @@ interface ProductDao {
 
     // get products pending sync
     @Query("SELECT * FROM products WHERE syncStatus != :synced")
-    suspend fun getPendingSync(synced: String = SyncStatus.SYNCED): List<ProductEntity>
+    suspend fun getPendingSync(synced: SyncStatus = SyncStatus.SYNCED): List<ProductEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(product: ProductEntity)
@@ -28,10 +28,10 @@ interface ProductDao {
 
     // marks isDeleted and sets syncStatus to DELETED
     @Query("UPDATE products SET isDeleted = 1, syncStatus = :deleted, updatedAt = :now WHERE id = :id")
-    suspend fun softDelete(id: String, deleted: String = SyncStatus.DELETED, now: Long = System.currentTimeMillis())
+    suspend fun softDelete(id: String, deleted: SyncStatus = SyncStatus.DELETED, now: Long = System.currentTimeMillis())
 
     @Query("UPDATE products SET syncStatus = :synced WHERE id = :id")
-    suspend fun markSynced(id: String, synced: String = SyncStatus.SYNCED)
+    suspend fun markSynced(id: String, synced: SyncStatus = SyncStatus.SYNCED)
 
     // to browse a specific shop's products
     @Query("SELECT * FROM products WHERE ownerId = :ownerId AND isDeleted = 0 AND stockQuantity > 0")

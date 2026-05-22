@@ -22,7 +22,7 @@ fun ProductEntity.toDomain(): Product = Product(
 )
 
 // Domain → Entity
-fun Product.toEntity(syncStatus: String = SyncStatus.PENDING): ProductEntity = ProductEntity(
+fun Product.toEntity(syncStatus: SyncStatus = SyncStatus.PENDING): ProductEntity = ProductEntity(
     id = id,
     ownerId = ownerId,
     name = name,

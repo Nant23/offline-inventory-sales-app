@@ -1,6 +1,6 @@
-package com.ananta.pasal.features.dashboard.domain.repository
+package com.ananta.pasal.features.dashboard.owner.domain.repository
 
-import com.ananta.pasal.features.dashboard.domain.model.DashBoardStats
+import com.ananta.pasal.features.dashboard.owner.domain.model.DashBoardStats
 import com.ananta.pasal.source.local.model.Order
 import com.ananta.pasal.source.local.model.Product
 import kotlinx.coroutines.flow.Flow

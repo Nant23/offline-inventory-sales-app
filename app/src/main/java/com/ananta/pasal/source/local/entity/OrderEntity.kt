@@ -16,7 +16,7 @@ data class OrderEntity(
     val itemsJson: String,
     val totalPrice: Double,
     val status: String = OrderStatus.PENDING,
-    val syncStatus: String = SyncStatus.PENDING,
+    val syncStatus: SyncStatus = SyncStatus.PENDING,
     val createdAt: Long = System.currentTimeMillis(),
     val updatedAt: Long = System.currentTimeMillis()
 )
